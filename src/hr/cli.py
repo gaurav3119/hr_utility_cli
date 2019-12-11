@@ -8,17 +8,18 @@ def create_parser():
     return parser
 def main():
     import sys
-    from hr import export, users
+    from hr import export
     from hr import users as u
 
-    args = creat_parser().parse.args()
-    users =u.fetch_users()
+    args = create_parser().parse_args()
+    users = u.fetch_users()
 
     if args.path:
         file = open(args.path, 'w', newline ='')
     else:
-        file= sys.stdout
-    if ars.format == 'json':
+        file = sys.stdout
+
+    if args.format == 'json':
         export.to_json_file(file, users)
     else:
         export.to_csv_file(file, users)
